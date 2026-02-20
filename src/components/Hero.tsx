@@ -53,11 +53,14 @@ export default function Hero() {
                                 Pre-order HexBox
                             </Button>
                         </a>
-                        <a href="#HowItWorks">
-                            <Button size="lg" variant="outline" className="text-white bg-slate-500 border-slate-700 hover:bg-slate-400">
-                                How It Works
-                            </Button>
-                        </a>
+                        <Button
+                            size="lg"
+                            variant="outline"
+                            onClick={() => setIsVideoOpen(true)} // Now both paths trigger the video
+                            className="text-white border-slate-700 bg-slate-900/50 hover:bg-slate-800 gap-2"
+                        >
+                            <Play className="w-4 h-4 fill-current text-blue-500" /> Watch Video
+                        </Button>
                     </div>
                 </div>
 

@@ -3,9 +3,9 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Check } from "lucide-react";
 
-export default function PricingWaitlist() {
+export default function Order() {
     return (
-        <section className="py-24 bg-slate-950 border-t border-slate-900 px-6">
+        <section className="py-24 bg-slate-950 border-t border-slate-900 px-6" id="Order">
             <div className="max-w-5xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
@@ -38,7 +38,7 @@ export default function PricingWaitlist() {
                         </ul>
                     </div>
 
-                    {/* Right Side: The Waitlist Card */}
+                    {/* Right Side: The Order Card */}
                     <div className="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl relative overflow-hidden">
                         {/* Decorative background glow */}
                         <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-600/10 blur-[80px]" />
@@ -62,7 +62,7 @@ export default function PricingWaitlist() {
                                     </Button>
                                 </div>
                                 <p className="text-[10px] text-slate-500 uppercase tracking-widest">
-                                    Secure your spot • No payment required today
+                                    Secure your spot
                                 </p>
                             </div>
                         </div>

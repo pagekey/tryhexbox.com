@@ -34,14 +34,14 @@ export default function Hero() {
 
                     <div className="flex flex-wrap gap-4 pt-4">
                         <a href="#Order">
-                        <Button size="lg" className="bg-blue-600 hover:bg-blue-500 px-8">
+                            <Button size="lg" className="bg-blue-600 hover:bg-blue-500 px-8">
                                 Pre-order HexBox
-                        </Button>
+                            </Button>
                         </a>
                         <a href="#HowItWorks">
-                        <Button size="lg" variant="outline" className="text-white bg-slate-500 border-slate-700 hover:bg-slate-400">
+                            <Button size="lg" variant="outline" className="text-white bg-slate-500 border-slate-700 hover:bg-slate-400">
                                 How It Works
-                        </Button>
+                            </Button>
                         </a>
                     </div>
                 </div>
@@ -62,18 +62,33 @@ export default function Hero() {
 
             {/* Basic Video Modal Placeholder */}
             {isVideoOpen && (
-                <div className="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
-                    <div className="relative w-full max-w-4xl aspect-video bg-black border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+                <div className="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 lg:p-12">
+                    {/* The Container: 
+       - max-w-5xl keeps it from getting TOO huge on massive screens.
+       - aspect-video maintains the 16:9 ratio automatically.
+    */}
+                    <div className="relative w-full max-w-5xl aspect-video bg-black border border-slate-800 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+
+                        {/* Close Button: Moved outside or styled better */}
                         <button
                             onClick={() => setIsVideoOpen(false)}
-                            className="absolute top-4 right-4 text-white hover:text-blue-400 z-[110]"
+                            className="absolute top-4 right-4 text-white/50 hover:text-white z-[110] bg-black/20 backdrop-blur-md p-2 rounded-full transition-colors"
                         >
-                            Close [✕]
+                            <span className="sr-only">Close</span>
+                            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
                         </button>
-                        <div className="w-full h-full flex items-center justify-center text-slate-500">
-                            {/* Replace with <video> tag or iframe once you have the file */}
-                            <p>Video Player Placeholder</p>
-                        </div>
+
+                        {/* The Responsive Iframe */}
+                        <iframe
+                            className="absolute top-0 left-0 w-full h-full"
+                            src="https://www.youtube.com/embed/bx_nJZw9ims?autoplay=1"
+                            title="HexBox Manifesto"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                        ></iframe>
                     </div>
                 </div>
             )}

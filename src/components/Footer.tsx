@@ -32,24 +32,46 @@ export default function Footer() {
 
                     {/* Links Column */}
                     <div>
-                        <h4 className="text-white font-semibold mb-4">Product</h4>
-                        <ul className="space-y-2 text-sm text-slate-400">
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Documentation</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">YAML Specs</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Hardware Info</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">OSS License</a></li>
+                        <h4 className="text-white font-semibold mb-4 text-[11px] uppercase tracking-[0.2em] opacity-50">Product</h4>
+                        <ul className="space-y-3 text-sm">
+                            <li className="flex items-center justify-between group">
+                                <span className="text-slate-500 italic">Documentation</span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-slate-800 text-slate-700 uppercase tracking-widest">Soon</span>
+                            </li>
+                            <li className="flex items-center justify-between group">
+                                <span className="text-slate-500 italic">YAML Specs</span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-slate-800 text-slate-700 uppercase tracking-widest">Soon</span>
+                            </li>
+                            <li className="flex items-center justify-between group">
+                                <span className="text-slate-500 italic">Hardware Info</span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-slate-800 text-slate-700 uppercase tracking-widest">Soon</span>
+                            </li>
+                            <li className="flex items-center justify-between group">
+                                <span className="text-slate-500 italic">OSS License</span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-slate-800 text-slate-700 uppercase tracking-widest">Soon</span>
+                            </li>
                         </ul>
                     </div>
 
                     {/* Legal Column */}
                     <div>
-                        <h4 className="text-white font-semibold mb-4">Company</h4>
-                        <ul className="space-y-2 text-sm text-slate-400">
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Our Mission</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a></li>
+                        <h4 className="text-white font-semibold mb-4 text-[11px] uppercase tracking-[0.2em] opacity-50">Company</h4>
+                        <ul className="space-y-3 text-sm">
+                            <li className="flex items-center justify-between group">
+                                <span className="text-slate-500 italic">Our Mission</span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-slate-800 text-slate-700 uppercase tracking-widest">Soon</span>
+                            </li>
+                            <li className="flex items-center justify-between group">
+                                <span className="text-slate-500 italic">Privacy Policy</span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-slate-800 text-slate-700 uppercase tracking-widest">Soon</span>
+                            </li>
+                            <li className="flex items-center justify-between group">
+                                <span className="text-slate-500 italic">Terms of Service</span>
+                                <span className="text-[9px] font-mono px-1.5 py-0.5 rounded border border-slate-800 text-slate-700 uppercase tracking-widest">Soon</span>
+                            </li>
                         </ul>
                     </div>
+
                 </div>
 
                 {/* Bottom Bar: Brand Polish */}

@@ -54,7 +54,7 @@ export default function Footer() {
                 {/* Bottom Bar: Brand Polish */}
                 <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-4">
                     <p className="text-slate-500 text-xs">
-                        © 2024 HexBox Labs. All rights reserved.
+                        Copyright &copy; 2026 <a className="underline" href="https://pagekey.io">PageKey Solutions, LLC</a>. All rights reserved.
                     </p>
 
                     {/* The "Pulse" - Real-time Brand Polish */}

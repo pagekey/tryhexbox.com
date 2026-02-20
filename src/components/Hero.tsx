@@ -27,18 +27,23 @@ export default function Hero() {
                         </span>
                     </h1>
 
-                    <div className="max-w-[500px] text-slate-400 text-lg md:text-xl leading-relaxed space-y-4">
-                        <p className="text-xl text-slate-300 font-medium border-l-2 border-blue-500 pl-4 mt-12">
-                            Worried about AI?
+                    <div className="max-w-[500px] space-y-6">
+                        <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
+                            The self-hosting appliance that turns "the cloud" into <span className="text-white">your private vault</span>.
+                            Fully observable, unit-testable, and billionaire-free.
                         </p>
-                        <p className="max-w-md text-slate-400 text-lg">
-                            HexBox is your defense: a fully observable sanctuary for your digital life.
-                        </p>
-                        {/* Visual Features List */}
-                        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-mono text-blue-400/80">
-                            <span>// NO SUBSCRIPTIONS</span>
-                            <span>// NO TRACKING</span>
-                            <span>// NO BILLIONAIRES</span>
+
+                        {/* Clean, horizontal manifest line */}
+                        <div className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-widest text-blue-500/60 uppercase">
+                            <span className="flex items-center gap-2">
+                                <div className="w-1 h-1 bg-blue-500 rounded-full" /> No Subscriptions
+                            </span>
+                            <span className="flex items-center gap-2">
+                                <div className="w-1 h-1 bg-blue-500 rounded-full" /> No Tracking
+                            </span>
+                            <span className="flex items-center gap-2">
+                                <div className="w-1 h-1 bg-blue-500 rounded-full" /> Local First
+                            </span>
                         </div>
                     </div>
 

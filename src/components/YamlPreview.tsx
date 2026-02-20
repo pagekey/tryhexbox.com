@@ -28,11 +28,11 @@ methods:
     ref: echo/chat.py
 `
     },
-    Provider_Code: {
+    code: {
         language: "python",
         file: "chat.py",
         title: "The Code",
-        desc: "A snippet of code anyone can understand and test.",
+        desc: "The functional core of the resource. The logic is fully auditable and testable through dependency injection.",
         code: `import hex
 
 # Gather state and inputs.
@@ -159,7 +159,7 @@ export default function YamlPreview() {
                                 <h4 className="text-white font-bold mb-2 flex items-center gap-2">
                                     {activeTab === 'contract' && <ShieldCheck className="w-4 h-4 text-blue-400" />}
                                     {activeTab === 'provider' && <Layers className="w-4 h-4 text-blue-400" />}
-                                    {activeTab === 'Provider_Code' && <Terminal className="w-4 h-4 text-blue-400" />}
+                                    {activeTab === 'code' && <Terminal className="w-4 h-4 text-blue-400" />}
                                     {activeTab === 'item' && <Box className="w-4 h-4 text-blue-400" />}
                                     {codeSnippets[activeTab].title}
                                 </h4>

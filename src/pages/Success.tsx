@@ -10,9 +10,11 @@ export default function Success() {
 
             <div className="max-w-2xl w-full relative z-10 text-center space-y-8">
                 {/* Brand Logo */}
-                <div className="flex justify-center mb-10">
-                    <Hexagon className="w-12 h-12 text-blue-500 fill-blue-500/20" />
-                </div>
+                <a href="/">
+                    <div className="flex justify-center mb-10">
+                        <Hexagon className="w-12 h-12 text-blue-500 fill-blue-500/20" />
+                    </div>
+                </a>
 
                 <div className="space-y-4">
                     <Badge variant="outline" className="border-emerald-500/50 text-emerald-400 bg-emerald-500/5 px-4 py-1">

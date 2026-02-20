@@ -1,4 +1,4 @@
-import { Terminal, Cpu, PlugZap, Globe, ShieldCheck, HardDriveDownload } from "lucide-react";
+import { PlugZap, Globe, ShieldCheck, HardDriveDownload } from "lucide-react";
 
 const steps = [
     {

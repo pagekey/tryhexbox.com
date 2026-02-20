@@ -1,19 +1,12 @@
-import Features from "./components/Features"
-import Footer from "./components/Footer"
-import Hero from "./components/Hero"
-import HowItWorks from "./components/HowItWorks"
-import Order from "./components/Order"
-import YamlPreview from "./components/YamlPreview"
+import { Route, Routes } from "react-router-dom"
+import Home from "./pages/Home"
+import Success from "./pages/Success"
 
 function App() {
-  return <>
-    <Hero />
-    <Features />
-    <YamlPreview />
-    <HowItWorks />
-    <Order />
-    <Footer />
-  </>
+  return <Routes>
+    <Route path="success" element={<Success />} />
+    <Route path="*" element={<Home />} />
+  </Routes>
 }
 
 export default App

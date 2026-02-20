@@ -27,9 +27,9 @@ export default function Hero() {
                         </span>
                     </h1>
 
-                    <div className="max-w-[500px] text-slate-400 text-lg md:text-xl leading-relaxed space-y-2">
-                        <p className="text-xl text-slate-300 font-medium border-l-2 border-blue-500 pl-4">
-                            Stop feeding the machine.
+                    <div className="max-w-[500px] text-slate-400 text-lg md:text-xl leading-relaxed space-y-4">
+                        <p className="text-xl text-slate-300 font-medium border-l-2 border-blue-500 pl-4 mt-12">
+                            Worried about AI?
                         </p>
                         <p className="max-w-md text-slate-400 text-lg">
                             HexBox is your defense: a fully observable sanctuary for your digital life.
@@ -94,7 +94,7 @@ export default function Hero() {
                         <iframe
                             className="absolute top-0 left-0 w-full h-full"
                             src="https://www.youtube.com/embed/bx_nJZw9ims?autoplay=1"
-                            title="HexBox Manifesto"
+                            title="HexBox Mission"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen

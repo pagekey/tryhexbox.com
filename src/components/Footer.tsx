@@ -1,4 +1,4 @@
-import { Hexagon, Github, Twitter, Mail } from "lucide-react";
+import { Hexagon, Github, Mail, Youtube } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -11,19 +11,20 @@ export default function Footer() {
                         <div className="flex items-center gap-2 mb-4">
                             <Hexagon className="w-6 h-6 text-blue-500 fill-blue-500/20" />
                             <span className="text-xl font-bold text-white tracking-tight">HexBox</span>
+                            <span className="text-slate-500 text-sm font-medium ml-1">by <a href="https://pagekey.io">PageKey</a></span>
                         </div>
                         <p className="text-slate-400 max-w-sm mb-6">
                             The self-hosting appliance for the modern era.
                             No subscriptions, no black boxes, just your data in your home.
                         </p>
                         <div className="flex gap-4">
-                            <a href="#" className="text-slate-500 hover:text-white transition-colors">
+                            <a href="https://github.com/pagekey" className="text-slate-500 hover:text-white transition-colors">
                                 <Github className="w-5 h-5" />
                             </a>
-                            <a href="#" className="text-slate-500 hover:text-white transition-colors">
-                                <Twitter className="w-5 h-5" />
+                            <a href="https://youtube.com/@PageKey" className="text-slate-500 hover:text-white transition-colors">
+                                <Youtube className="w-5 h-5" />
                             </a>
-                            <a href="#" className="text-slate-500 hover:text-white transition-colors">
+                            <a href="mailto:hello@pagekey.io" className="text-slate-500 hover:text-white transition-colors">
                                 <Mail className="w-5 h-5" />
                             </a>
                         </div>
@@ -44,7 +45,7 @@ export default function Footer() {
                     <div>
                         <h4 className="text-white font-semibold mb-4">Company</h4>
                         <ul className="space-y-2 text-sm text-slate-400">
-                            <li><a href="#" className="hover:text-blue-400 transition-colors">Our Manifesto</a></li>
+                            <li><a href="#" className="hover:text-blue-400 transition-colors">Our Mission</a></li>
                             <li><a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
                             <li><a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a></li>
                         </ul>

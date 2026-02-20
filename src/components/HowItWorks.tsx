@@ -29,7 +29,7 @@ const steps = [
 
 export default function HowItWorks() {
     return (
-        <section className="py-24 bg-slate-950 border-t border-slate-900">
+        <section className="py-24 bg-slate-950 border-t border-slate-900" id="HowItWorks">
             <div className="max-w-6xl mx-auto px-6">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-20 gap-8">
                     <div className="max-w-xl">

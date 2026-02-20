@@ -2,7 +2,7 @@ import Features from "./components/Features"
 import Footer from "./components/Footer"
 import Hero from "./components/Hero"
 import HowItWorks from "./components/HowItWorks"
-import Waitlist from "./components/Waitlist"
+import Order from "./components/Order"
 import YamlPreview from "./components/YamlPreview"
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
     <Features />
     <YamlPreview />
     <HowItWorks />
-    <Waitlist />
+    <Order />
     <Footer />
   </>
 }

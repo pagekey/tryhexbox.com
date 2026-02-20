@@ -33,12 +33,16 @@ export default function Hero() {
                     </p>
 
                     <div className="flex flex-wrap gap-4 pt-4">
+                        <a href="#Order">
                         <Button size="lg" className="bg-blue-600 hover:bg-blue-500 px-8">
-                            Get Started
+                                Pre-order HexBox
                         </Button>
+                        </a>
+                        <a href="#HowItWorks">
                         <Button size="lg" variant="outline" className="text-white bg-slate-500 border-slate-700 hover:bg-slate-400">
-                            View Documentation
+                                How It Works
                         </Button>
+                        </a>
                     </div>
                 </div>
 

@@ -17,7 +17,7 @@ export default function Hero() {
                 {/* Left: Text Content */}
                 <div className="text-left space-y-6">
                     <Badge variant="outline" className="border-blue-500/50 text-blue-400 bg-blue-500/5">
-                        HexBox v1.0 is now live
+                        Batch 01 - Shipping Spring 2026
                     </Badge>
 
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white leading-[1.1]">
@@ -27,10 +27,20 @@ export default function Hero() {
                         </span>
                     </h1>
 
-                    <p className="max-w-[500px] text-slate-400 text-lg md:text-xl leading-relaxed">
-                        The self-hosting appliance that turns "the cloud" into "your drive."
-                        Fully observable, unit-testable, and billionaire-free.
-                    </p>
+                    <div className="max-w-[500px] text-slate-400 text-lg md:text-xl leading-relaxed space-y-2">
+                        <p className="text-xl text-slate-300 font-medium border-l-2 border-blue-500 pl-4">
+                            Stop feeding the machine.
+                        </p>
+                        <p className="max-w-md text-slate-400 text-lg">
+                            HexBox is your defense: a fully observable sanctuary for your digital life.
+                        </p>
+                        {/* Visual Features List */}
+                        <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-mono text-blue-400/80">
+                            <span>// NO SUBSCRIPTIONS</span>
+                            <span>// NO TRACKING</span>
+                            <span>// NO BILLIONAIRES</span>
+                        </div>
+                    </div>
 
                     <div className="flex flex-wrap gap-4 pt-4">
                         <a href="#Order">

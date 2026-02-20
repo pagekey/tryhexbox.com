@@ -1,30 +1,39 @@
 import { ShieldCheck, HardDrive, FileCode, Eye } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge"; // Ensure this is imported from your UI kit
 
 const features = [
     {
-        title: "Cloud Decoupler",
-        description: "The MVP focus: Automatically sync and backup your cloud files to your physical local drive. Your data, your electricity, your rules.",
+        title: "The Personal Vault",
+        description: "Automatically pull your photos and documents from legacy cloud providers onto your physical drive. If the cloud disappears tomorrow, your memories don't.",
         icon: <HardDrive className="w-6 h-6 text-blue-400" />,
         className: "md:col-span-2",
+        status: "MVP Feature",
+        statusColor: "bg-blue-500/10 text-blue-400 border-blue-500/20"
     },
     {
-        title: "Full Observability",
-        description: "No black boxes. See exactly how every app runs in real-time.",
+        title: "Traffic Guardian",
+        description: "Coming soon: The future of the HexBox. Watch your data flow in real-time and see exactly which 'smart' devices are leaking data to foreign servers.",
         icon: <Eye className="w-6 h-6 text-cyan-400" />,
         className: "md:col-span-1",
+        status: "Upcoming",
+        statusColor: "bg-slate-800 text-slate-500 border-slate-700"
     },
     {
-        title: "YAML-First Infrastructure",
-        description: "Configured via human-readable files. If you can read a list, you can manage your server.",
+        title: "Blueprint Control",
+        description: "Configure your digital life via human-readable YAML files. If you can read a list, you can manage your server. No 'black box' logic allowed.",
         icon: <FileCode className="w-6 h-6 text-purple-400" />,
         className: "md:col-span-1",
+        status: "MVP Feature",
+        statusColor: "bg-blue-500/10 text-blue-400 border-blue-500/20"
     },
     {
-        title: "Unit-Tested Reliability",
-        description: "The only home appliance that lets you run tests before you deploy. Stop guessing if your backup script works—know it does.",
+        title: "Verified Reliability",
+        description: "The first home appliance with built-in unit testing. Every backup and sync is verified by the engine before it finishes. No more corrupted file surprises.",
         icon: <ShieldCheck className="w-6 h-6 text-emerald-400" />,
         className: "md:col-span-2",
+        status: "MVP Feature",
+        statusColor: "bg-blue-500/10 text-blue-400 border-blue-500/20"
     },
 ];
 
@@ -44,9 +53,14 @@ export default function Features() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {features.map((feature, index) => (
-                        <Card key={index} className={`bg-slate-900/50 border-slate-800 backdrop-blur-sm ${feature.className}`}>
+                        <Card key={index} className={`bg-slate-900/50 border-slate-800 backdrop-blur-sm relative overflow-hidden group ${feature.className}`}>
                             <CardHeader>
-                                <div className="mb-4">{feature.icon}</div>
+                                <div className="flex justify-between items-start">
+                                    <div className="mb-4">{feature.icon}</div>
+                                    <Badge variant="outline" className={`text-[10px] uppercase tracking-tighter ${feature.statusColor}`}>
+                                        {feature.status}
+                                    </Badge>
+                                </div>
                                 <CardTitle className="text-white text-xl">{feature.title}</CardTitle>
                             </CardHeader>
                             <CardContent>

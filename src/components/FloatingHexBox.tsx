@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function FloatingHexBox() {
     return (
         <div className="relative w-64 h-64 md:w-80 md:h-80 perspective-1000">

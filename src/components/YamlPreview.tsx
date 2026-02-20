@@ -1,54 +1,51 @@
-import { Terminal, Check, Play, FileJson } from "lucide-react";
+import { Terminal, Check, Code2 } from "lucide-react";
 
-const yamlCode = `
-# HexBox Backup Configuration
-# Source: Google Drive -> Local Drive
+// We'll use the "Item" and "Contract" snippets as they are the most readable
+const yamlCode = `# Your Personal AI Instance
 
-appliance:
-  name: "Main-Vault"
-  observability: full
-  
-tasks:
-  - name: "Cloud-Sync"
-    source: cloud://google-drive/photos
-    destination: local://external-hd/backups
-    schedule: "0 0 * * *" # Daily at midnight
-    
-tests:
-  - name: "Verify Destination"
-    assert: destination.is_writable == true
-  - name: "Check Space"
-    assert: destination.available_gb > 10
+name: "oliver"
+contract_name: "assistant"
+provider_name: "ollama-assistant"
+
+state:
+  model_name: "HexGPT"
+  memory_vault: "/vault/ai-memory"
+
+# assistant.contract.yaml defines the limits:
+# chat:
+#   inputs: { prompt: str }
+#   outputs: { message: str }
 `;
 
 export default function YamlPreview() {
     return (
-        <section className="py-24 bg-slate-950 px-6">
+        <section className="py-24 bg-slate-950 px-6" id="Architecture">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tighter">
                         Observable by design.
                     </h2>
-                    <p className="text-slate-400 text-lg max-w-2xl">
-                        No proprietary hidden logic. Every action HexBox takes is defined in
-                        human-readable YAML and verified with local unit tests.
+                    <p className="text-slate-400 text-lg max-w-2xl leading-relaxed">
+                        HexBox uses a <span className="text-blue-400">Contract-First</span> architecture.
+                        Every AI assistant and backup task follows a human-readable blueprint that
+                        defines exactly what data it can touch.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl bg-slate-900/50">
 
                     {/* Editor Column */}
-                    <div className="lg:col-span-3 bg-[#0d1117] p-6 border-r border-slate-800">
-                        <div className="flex items-center gap-2 mb-4 text-slate-500 text-xs uppercase tracking-widest font-mono">
-                            <FileJson className="w-4 h-4" />
-                            config.yaml
+                    <div className="lg:col-span-3 bg-[#0d1117] p-8 border-r border-slate-800">
+                        <div className="flex items-center gap-2 mb-6 text-slate-500 text-xs uppercase tracking-widest font-mono">
+                            <Code2 className="w-4 h-4 text-blue-500" />
+                            eli.item.yaml
                         </div>
                         <pre className="font-mono text-sm leading-relaxed overflow-x-auto">
                             <code className="text-slate-300">
                                 {yamlCode.split('\n').map((line, i) => (
-                                    <div key={i} className="table-row">
-                                        <span className="table-cell pr-4 text-slate-600 text-right select-none w-8">{i + 1}</span>
-                                        <span className="table-cell">
+                                    <div key={i} className="flex gap-4">
+                                        <span className="text-slate-700 text-right select-none w-4">{i + 1}</span>
+                                        <span>
                                             {line.startsWith('#') ? (
                                                 <span className="text-slate-500 italic">{line}</span>
                                             ) : line.includes(':') ? (
@@ -66,44 +63,40 @@ export default function YamlPreview() {
                         </pre>
                     </div>
 
-                    {/* Terminal / Test Column */}
-                    <div className="lg:col-span-2 bg-slate-900 p-6 flex flex-col">
-                        <div className="flex items-center justify-between mb-8">
+                    {/* Terminal / Validation Column */}
+                    <div className="lg:col-span-2 bg-slate-900/80 p-8 flex flex-col">
+                        <div className="flex items-center justify-between mb-10">
                             <div className="flex items-center gap-2 text-slate-500 text-xs uppercase tracking-widest font-mono">
                                 <Terminal className="w-4 h-4" />
-                                Terminal
+                                HexOS Validator
                             </div>
-                            <div className="flex gap-2">
-                                <div className="w-2 h-2 rounded-full bg-red-500/50" />
-                                <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
+                            <div className="flex gap-1.5">
+                                <div className="w-2 h-2 rounded-full bg-slate-800" />
+                                <div className="w-2 h-2 rounded-full bg-slate-800" />
                                 <div className="w-2 h-2 rounded-full bg-emerald-500/50" />
                             </div>
                         </div>
 
-                        <div className="space-y-6">
-                            <div className="flex items-start gap-3">
-                                <Play className="w-4 h-4 text-blue-500 mt-1" />
-                                <div>
-                                    <p className="text-slate-300 font-mono text-sm">$ hexbox test config.yaml</p>
-                                    <p className="text-slate-500 text-xs mt-1">Running 2 locally defined tests...</p>
+                        <div className="space-y-8">
+                            <div className="space-y-2">
+                                <p className="text-slate-500 font-mono text-xs uppercase tracking-tight">Active Blueprint</p>
+                                <p className="text-blue-400 font-mono text-sm">assistant.contract.v1</p>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-3 bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl">
+                                    <Check className="w-4 h-4 text-blue-500" />
+                                    <span className="text-sm text-slate-300 font-mono">Verify Schema: <span className="text-emerald-500">VALID</span></span>
+                                </div>
+                                <div className="flex items-center gap-3 bg-blue-500/5 border border-blue-500/10 p-4 rounded-xl">
+                                    <Check className="w-4 h-4 text-blue-500" />
+                                    <span className="text-sm text-slate-300 font-mono">Vault Access: <span className="text-emerald-500">SECURE</span></span>
                                 </div>
                             </div>
 
-                            <div className="space-y-3">
-                                <div className="flex items-center gap-3 bg-emerald-500/5 border border-emerald-500/20 p-3 rounded-lg">
-                                    <Check className="w-4 h-4 text-emerald-500" />
-                                    <span className="text-sm text-emerald-200 font-mono italic">Verify Destination: PASS</span>
-                                </div>
-                                <div className="flex items-center gap-3 bg-emerald-500/5 border border-emerald-500/20 p-3 rounded-lg">
-                                    <Check className="w-4 h-4 text-emerald-500" />
-                                    <span className="text-sm text-emerald-200 font-mono italic">Check Space: PASS</span>
-                                </div>
-                            </div>
-
-                            <div className="mt-auto pt-6 border-t border-slate-800">
-                                <p className="text-xs text-slate-500 leading-relaxed font-mono">
-                                    [SUCCESS] All logic verified. HexBox is ready for
-                                    sovereign deployment.
+                            <div className="mt-auto pt-8 border-t border-slate-800/50">
+                                <p className="text-xs text-slate-500 leading-relaxed font-mono italic">
+                                    "Eli" is authorized to access local storage. No external pings detected.
                                 </p>
                             </div>
                         </div>

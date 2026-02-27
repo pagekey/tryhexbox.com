@@ -50,7 +50,7 @@ export default function Hero() {
                     <div className="flex flex-wrap gap-4 pt-4">
                         <a href="#Order">
                             <Button size="lg" className="bg-blue-600 hover:bg-blue-500 px-8">
-                                Pre-order HexBox
+                                Join Waitlist
                             </Button>
                         </a>
                         <Button

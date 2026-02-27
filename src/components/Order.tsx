@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Box, Zap, Globe, Mail, ChevronRight, Binary, Users, Cpu, Loader2, CheckCircle, AlertTriangle } from "lucide-react";
+import { Box, Zap, Globe, Mail, ChevronRight, Binary, Users, Cpu, Loader2, CheckCircle, AlertTriangle, Target } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
@@ -11,8 +11,8 @@ export default function Order() {
     const [showForm, setShowForm] = useState(false);
 
     // --- Form State ---
-    const [useCase, setUseCase] = useState("");
-    const [techLevel, setTechLevel] = useState("");
+    const [additionalFeedback, setAdditionalFeedback] = useState("");
+    const [primaryGoal, setPrimaryGoal] = useState("");
     const [email, setEmail] = useState("");
     const [isFormValid, setIsFormValid] = useState(false);
 
@@ -26,15 +26,14 @@ export default function Order() {
         const isValidEmail = emailRegex.test(email);
 
         if (
-            useCase.trim() !== "" &&
-            techLevel !== "" &&
+            primaryGoal !== "" &&
             isValidEmail
         ) {
             setIsFormValid(true);
         } else {
             setIsFormValid(false);
         }
-    }, [useCase, techLevel, email]);
+    }, [additionalFeedback, primaryGoal, email]);
 
     // --- Submission Handler ---
     const handleSubmit = async (e: React.FormEvent) => {
@@ -55,8 +54,8 @@ export default function Order() {
                         email: email,
                         newsletter: "hexbox-waitlist",
                         metadata: {
-                            "What do you want to use HexBox for?": useCase,
-                            "Technical preference?": techLevel
+                            "Anything else on your mind?": additionalFeedback,
+                            "Primary goal?": primaryGoal
                         }
                     }),
                 }
@@ -179,46 +178,47 @@ export default function Order() {
                                             </div>
                                         ) : (
                                             <form onSubmit={handleSubmit} className="space-y-6 text-left">
-                                                <div className="space-y-2">
-                                                    <Label className="text-slate-300 flex items-center gap-2 text-sm">
-                                                        <Users className="w-4 h-4 text-blue-400" />
-                                                        What do you want to use HexBox for?
-                                                    </Label>
-                                                    <Textarea
-                                                        value={useCase}
-                                                        onChange={(e) => setUseCase(e.target.value)}
-                                                        placeholder="e.g. Local LLMs, personal cloud..."
-                                                        className="bg-slate-950 border-slate-700 text-white min-h-[80px]"
-                                                    />
-                                                </div>
-
                                                 <div className="space-y-3">
                                                     <Label className="text-slate-300 flex items-center gap-2 text-sm">
-                                                        <Binary className="w-4 h-4 text-blue-400" />
-                                                        Technical preference?
+                                                        <Target className="w-4 h-4 text-blue-400" />
+                                                        Primary Goal?
                                                     </Label>
                                                     <RadioGroup
-                                                        value={techLevel}
-                                                        onValueChange={setTechLevel}
-                                                        className="grid grid-cols-3 gap-2"
+                                                        value={primaryGoal}
+                                                        onValueChange={setPrimaryGoal}
+                                                        className="grid grid-cols-1 gap-2"
                                                     >
                                                         {[
-                                                            { value: "cli", label: "Terminal", desc: "Full control" },
-                                                            { value: "mix", label: "Both", desc: "Flexibility" },
-                                                            { value: "gui", label: "Visual", desc: "Just works" },
+                                                            { value: "personal-cloud", label: "Personal Cloud", desc: "Sovereign data & privacy" },
+                                                            { value: "local-ai", label: "Local AI", desc: "Running LLMs & agents" },
+                                                            { value: "iot-hub", label: "IoT Hub", desc: "Home automation & hacking" },
+                                                            { value: "curious", label: "Just Curious", desc: "Not sure yet" },
                                                         ].map(option => (
                                                             <div key={option.value}>
                                                                 <RadioGroupItem value={option.value} id={option.value} className="peer sr-only" />
                                                                 <Label
                                                                     htmlFor={option.value}
-                                                                    className="flex flex-col items-center justify-between rounded-md border-2 border-slate-700 bg-slate-950 p-3 hover:bg-slate-800 peer-data-[state=checked]:border-blue-500 peer-data-[state=checked]:bg-blue-500/10 text-center cursor-pointer transition-all"
+                                                                    className="flex flex-col rounded-md border-2 border-slate-700 bg-slate-950 p-4 hover:bg-slate-800 peer-data-[state=checked]:border-blue-500 peer-data-[state=checked]:bg-blue-500/10 cursor-pointer transition-all"
                                                                 >
-                                                                    <span className="text-xs font-mono font-bold text-white peer-data-[state=checked]:text-blue-300">{option.label}</span>
-                                                                    <span className="text-[10px] text-slate-500 mt-1">{option.desc}</span>
+                                                                    <span className="text-sm font-bold text-white peer-data-[state=checked]:text-blue-300">{option.label}</span>
+                                                                    <span className="text-xs text-slate-500 mt-1">{option.desc}</span>
                                                                 </Label>
                                                             </div>
                                                         ))}
                                                     </RadioGroup>
+                                                </div>
+
+                                                <div className="space-y-2">
+                                                    <Label className="text-slate-300 flex items-center gap-2 text-sm">
+                                                        <Users className="w-4 h-4 text-blue-400" />
+                                                        Anything else on your mind?
+                                                    </Label>
+                                                    <Textarea
+                                                        value={additionalFeedback}
+                                                        onChange={(e) => setAdditionalFeedback(e.target.value)}
+                                                        placeholder="e.g. Local LLMs, personal cloud..."
+                                                        className="bg-slate-950 border-slate-700 text-white min-h-[80px]"
+                                                    />
                                                 </div>
 
                                                 <div className="space-y-2">

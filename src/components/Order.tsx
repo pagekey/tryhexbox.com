@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Box, Zap, Globe, Mail, ChevronRight, Binary, Users, Cpu, Loader2, CheckCircle, AlertTriangle, Target } from "lucide-react";
+import { Box, Zap, Globe, Mail, ChevronRight, Users, Cpu, Loader2, CheckCircle, AlertTriangle, Target } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";

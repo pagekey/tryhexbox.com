@@ -73,7 +73,7 @@ export default function Order() {
     };
 
     return (
-        <section className="py-24 bg-slate-950 border-t border-slate-900 px-6" id="Order">
+        <section className="py-24 bg-slate-950 border-t border-slate-900 px-6">
             <div className="max-w-5xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
@@ -107,7 +107,7 @@ export default function Order() {
                     </div>
 
                     {/* Right Side: Interaction Card */}
-                    <div className="relative group">
+                    <div className="relative group" id="Order">
                         <div className="absolute -inset-0.5 bg-blue-500/20 rounded-2xl blur group-hover:bg-blue-500/30 transition duration-1000"></div>
 
                         <div className="bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl relative overflow-hidden min-h-[420px] flex flex-col justify-center">

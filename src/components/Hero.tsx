@@ -101,7 +101,7 @@ export default function Hero() {
                         {/* The Responsive Iframe */}
                         <iframe
                             className="absolute top-0 left-0 w-full h-full"
-                            src="https://www.youtube.com/embed/bx_nJZw9ims?autoplay=1"
+                            src="https://www.youtube.com/embed/HaWhwNRAgLo?autoplay=1"
                             title="HexBox Mission"
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

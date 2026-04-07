@@ -2,26 +2,42 @@
 <html>
     <head>
         <title>Hexbox OAuth</title>
+        <style>
+            body {
+                font-family: monospace;
+                background-color: #111;
+                color: #eee;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+            input {
+                width: 80%;
+                max-width: 500px;
+                padding: 8px;
+                font-size: 1rem;
+                margin-top: 10px;
+            }
+        </style>
     </head>
     <body>
+        <h1>Authorization Complete</h1>
+        <p>Copy the code below and paste it into Hexbox:</p>
+        <input id="codeBox" readonly/>
         <script>
             // Extract query parameters
             const params = new URLSearchParams(window.location.search);
-            const code = params.get("code");
-            const state = params.get("state");
+            const code = params.get("code") || "No code found";
 
-            // Post the code back to your local UI using postMessage
-            // Assumes your local UI opens this in a popup window
-            window
-                .opener
-                .postMessage({
-                    code,
-                    state
-                }, "*");
+            // Display code in the input box
+            const codeBox = document.getElementById("codeBox");
+            codeBox.value = code;
 
-            // Close the popup after sending the code
-            window.close();
+            // Auto-select the code so user can copy quickly
+            codeBox.focus();
+            codeBox.select();
         </script>
-        <p>Authorization complete. You can close this window.</p>
     </body>
 </html>

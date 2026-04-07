@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hexbox OAuth</title>
+    </head>
+    <body>
+        <script>
+            // Extract query parameters
+            const params = new URLSearchParams(window.location.search);
+            const code = params.get("code");
+            const state = params.get("state");
+
+            // Post the code back to your local UI using postMessage
+            // Assumes your local UI opens this in a popup window
+            window
+                .opener
+                .postMessage({
+                    code,
+                    state
+                }, "*");
+
+            // Close the popup after sending the code
+            window.close();
+        </script>
+        <p>Authorization complete. You can close this window.</p>
+    </body>
+</html>

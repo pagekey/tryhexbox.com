@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play } from "lucide-react"; // Import for the "click me" hint
+import { Play, Video } from "lucide-react"; // Imported Video icon for devlogs
 import FloatingHexBox from "./FloatingHexBox";
 
 export default function Hero() {
@@ -59,8 +59,23 @@ export default function Hero() {
                             onClick={() => setIsVideoOpen(true)} // Now both paths trigger the video
                             className="text-white border-slate-700 bg-slate-900/50 hover:bg-slate-800 gap-2"
                         >
-                            <Play className="w-4 h-4 fill-current text-blue-500" /> Watch Video
+                            <Play className="w-4 h-4 fill-current text-blue-500" /> Watch Pitch
                         </Button>
+
+                        {/* Third Action Button: Devlogs Link */}
+                        <a
+                            href="https://www.youtube.com/playlist?list=PL3Kz_hCNpKST8ON430ggXjmJsKQ3WiqRK"
+                            target="_blank"
+                            rel="noreferrer"
+                        >
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                className="text-slate-300 border-slate-800 bg-transparent hover:bg-slate-900 hover:text-white gap-2"
+                            >
+                                <Video className="w-4 h-4 text-emerald-400" /> Devlogs
+                            </Button>
+                        </a>
                     </div>
                 </div>
 
@@ -82,9 +97,9 @@ export default function Hero() {
             {isVideoOpen && (
                 <div className="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 lg:p-12">
                     {/* The Container: 
-       - max-w-5xl keeps it from getting TOO huge on massive screens.
-       - aspect-video maintains the 16:9 ratio automatically.
-    */}
+                       - max-w-5xl keeps it from getting TOO huge on massive screens.
+                       - aspect-video maintains the 16:9 ratio automatically.
+                    */}
                     <div className="relative w-full max-w-5xl aspect-video bg-black border border-slate-800 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
 
                         {/* Close Button: Moved outside or styled better */}

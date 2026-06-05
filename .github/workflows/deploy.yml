@@ -19,6 +19,14 @@ jobs:
           npm install
           npm run build
 
+      - name: Copy pages
+        run: |
+          # Create the photos directory inside Eleventy's output folder
+          mkdir -p ./_site/photos
+          
+          # Copy Vite's single-page build into that folder
+          cp -r ./vite/dist/* ./_site/photos/
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

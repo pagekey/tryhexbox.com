@@ -21,7 +21,8 @@ jobs:
 
       - name: Copy pages
         run: |
-          cp -r dist/ dist/photos/
+          cp -r dist/ tmpphotos
+          mv tmpphotos dist/photos
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

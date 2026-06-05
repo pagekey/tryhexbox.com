@@ -21,11 +21,7 @@ jobs:
 
       - name: Copy pages
         run: |
-          # Create the photos directory inside Eleventy's output folder
-          mkdir -p ./_site/photos
-          
-          # Copy Vite's single-page build into that folder
-          cp -r ./dist/* ./_site/photos/
+          cp -r dist/ dist/photos/
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

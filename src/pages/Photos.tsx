@@ -1,13 +1,10 @@
-import { ArrowRight, Video, CheckCircle2, ShieldAlert, Sparkles, HelpCircle } from "lucide-react";
+import { ArrowRight, Video, CheckCircle2, Sparkles, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Layout from "@/components/Layout";
+import OrderCard from "@/components/OrderCard"; // Adjusted path assuming it is in components folder
 
 export default function PhotosPage() {
-    // const youtubeVideoId = "dQw4w9WgXcQ";
-    const stripeCheckoutUrl = "https://buy.stripe.com/fZu8wQ6yu7BYckP8pDgEg08";
-
     return (
         <Layout>
             {/* Added deep slate background to match the main Hero aesthetic */}
@@ -70,8 +67,15 @@ export default function PhotosPage() {
                             </p>
                         </div>
 
-                        <div className="text-center text-slate-500 py-12 border border-dashed border-slate-800 rounded-2xl bg-slate-900/20">
-                            Video coming soon.
+                        {/* Responsive Video Wrapper */}
+                        <div className="w-full max-w-3xl mx-auto overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/20 shadow-2xl">
+                            <iframe
+                                className="w-full aspect-video"
+                                src="https://www.youtube.com/embed/0DyBc2b1KzY"
+                                title="Immich DIY Setup Guide"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen
+                            ></iframe>
                         </div>
                     </section>
 
@@ -111,53 +115,12 @@ export default function PhotosPage() {
                                 </div>
                             </div>
 
-                            {/* Pricing / Stripe Conversion Card */}
+                            {/* Pricing / Reusable Order Card Component */}
                             <div className="md:col-span-2">
-                                <Card className="relative border border-blue-500/30 shadow-2xl bg-slate-900/40 backdrop-blur-md text-slate-100">
-                                    {/* Subtle gradient flash overlay behind the card */}
-                                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 blur-2xl rounded-full pointer-events-none" />
-
-                                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-0.5 bg-blue-600 text-white text-[10px] font-mono tracking-widest uppercase rounded-full border border-blue-400/30">
-                                        Batch #01
-                                    </div>
-
-                                    <CardHeader className="text-center pb-4 pt-8">
-                                        <CardTitle className="text-2xl font-bold text-white">HexBox Photos Ed. 1</CardTitle>
-                                        <CardDescription className="text-slate-400">Complete hardware setup</CardDescription>
-                                        <div className="mt-4 flex items-baseline justify-center gap-1">
-                                            <span className="text-5xl font-extrabold tracking-tight text-white">$349</span>
-                                            <span className="text-sm font-semibold text-blue-400 font-mono">USD</span>
-                                        </div>
-                                        <div className="mt-2">
-                                            <span className="text-xs text-emerald-400 font-medium bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full inline-block">
-                                                Free US Shipping
-                                            </span>
-                                        </div>
-                                    </CardHeader>
-
-                                    <CardContent className="space-y-4">
-                                        <hr className="border-slate-800" />
-
-                                        <div className="rounded-xl bg-blue-950/40 p-3.5 border border-blue-500/20 flex gap-3 items-start text-xs text-slate-300">
-                                            <ShieldAlert className="h-4 w-4 shrink-0 text-blue-400 mt-0.5" />
-                                            <div>
-                                                <p className="font-semibold text-blue-300">Strict Availability</p>
-                                                <p className="mt-0.5 text-slate-400 leading-normal">There is literally only 1 unit of this configuration sitting on my desk. When clicked, checkout will lock.</p>
-                                            </div>
-                                        </div>
-
-                                        <Button size="lg" className="w-full bg-blue-600 hover:bg-blue-500 text-white text-base font-semibold transition-all group shadow-lg shadow-blue-600/20" asChild>
-                                            <a href={stripeCheckoutUrl}>
-                                                Buy Now via Stripe
-                                                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                            </a>
-                                        </Button>
-
-                                        <p className="text-center text-[11px] text-slate-500">
-                                            Secure transaction processed by Stripe.
-                                        </p>
-                                    </CardContent>
-                                </Card>
+                                <OrderCard
+                                    apiEndpoint="https://zu0rim0p04.execute-api.us-east-1.amazonaws.com/default/email-signup-handler"
+                                    stripeCheckoutUrl="https://buy.stripe.com/fZu8wQ6yu7BYckP8pDgEg08"
+                                />
                             </div>
                         </div>
                     </section>
@@ -179,7 +142,7 @@ export default function PhotosPage() {
                                     <HelpCircle className="h-4 w-4 text-blue-400 shrink-0" /> Can I expand storage?
                                 </h4>
                                 <p className="text-sm text-slate-400 leading-relaxed">
-                                    Absolutely. It features high-speed expansion ports, allowing you to easily map external solid-state drives or network-attached shares (NAS) right via the built-in web UI.
+                                    Absolutely. It features high-speed expansion ports, allowing you to easily map external solid-state drives or network-attached shares (NAS).
                                 </p>
                             </div>
                         </div>

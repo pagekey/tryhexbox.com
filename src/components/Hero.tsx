@@ -17,7 +17,7 @@ export default function Hero() {
                 {/* Left: Text Content */}
                 <div className="text-left space-y-6">
                     <Badge variant="outline" className="border-blue-500/50 text-blue-400 bg-blue-500/5">
-                        Batch 01 - Shipping Spring 2026
+                        Batch 01 - Shipping in 2026
                     </Badge>
 
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white leading-[1.1]">
@@ -50,7 +50,7 @@ export default function Hero() {
                     <div className="flex flex-wrap gap-4 pt-4">
                         <a href="#Order">
                             <Button size="lg" className="bg-blue-600 hover:bg-blue-500 px-8">
-                                Join Waitlist
+                                Get HexBox
                             </Button>
                         </a>
                         <Button
@@ -61,21 +61,6 @@ export default function Hero() {
                         >
                             <Play className="w-4 h-4 fill-current text-blue-500" /> Watch Pitch
                         </Button>
-
-                        {/* Third Action Button: Devlogs Link */}
-                        <a
-                            href="https://www.youtube.com/playlist?list=PL3Kz_hCNpKST8ON430ggXjmJsKQ3WiqRK"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <Button
-                                size="lg"
-                                variant="outline"
-                                className="text-slate-300 border-slate-800 bg-transparent hover:bg-slate-900 hover:text-white gap-2"
-                            >
-                                <Video className="w-4 h-4 text-emerald-400" /> Devlogs
-                            </Button>
-                        </a>
                     </div>
                 </div>
 

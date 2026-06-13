@@ -1,79 +1,97 @@
 import { useState } from "react";
-import { Terminal, Check, Code2, Layers, ShieldCheck, Box } from "lucide-react";
+import { Terminal, Check, Code2, GitFork, Cpu, Eye } from "lucide-react";
 
 const codeSnippets = {
-    item: {
+    graph: {
         language: "yaml",
-        file: "eli.item.yaml",
-        title: "The Living Instance",
-        desc: "The final deployment. This links a name (Eli) to a specific provider and sets the local state.",
-        code: `name: eli
-contract_name: assistant
-provider_name: echo-assistant
-state:
-  model_name: HexGPT
-`
-    },
-    provider: {
-        language: "yaml",
-        file: "echo-assistant.provider.yaml",
-        title: "The Logic Engine",
-        desc: "Tells HexBox how to actually run the code. In this case, it's a local Python executor.",
-        code: `name: echo-assistant
-implements_contract: assistant
-executor: python
-methods:
-  chat:
-    type: python
-    ref: echo/chat.py
-`
-    },
-    code: {
-        language: "python",
-        file: "chat.py",
-        title: "The Code",
-        desc: "The functional core of the resource. The logic is fully auditable and testable through dependency injection.",
-        code: `import hex
-
-# Gather state and inputs.
-model_name = hex.get_state("model_name")
-prompt = hex.get_input("prompt")
-
-# Print the response
-print(f"AI ({model_name}): You said {prompt}")
-`
-    },
-    contract: {
-        language: "yaml",
-        file: "assistant.contract.yaml",
-        title: "The Security Layer",
-        desc: "Defines the strict 'shape' of the AI. This ensures the assistant can only speak through defined inputs/outputs.",
-        code: `name: assistant
-state_schema:
-  model_name: str
-methods:
-  chat:
+        file: "auth.yaml",
+        title: "The DAG Topology",
+        desc: "Defines the pipeline. Inputs flow cleanly through nodes, explicitly mapping dependencies like passing auth data directly to the storage driver.",
+        code: `inputs: []
+outputs:
+  secrets_path: auth_write.secrets_path
+nodes:
+  auth:
+    provider: hexmod-backup.auth:login
     inputs:
-      prompt: str
+      redirect_uri: https://tryhexbox.com/callback
     outputs:
-      message: str
+      - access_token
+      - refresh_token
+  auth_write:
+    provider: hexmod-backup.auth:write
+    inputs:
+      refresh_token: auth.refresh_token
+    outputs:
+      - secrets_path
+`
+    },
+    node: {
+        language: "python",
+        file: "auth.py",
+        title: "Deterministic Execution",
+        desc: "The functional core of a DAG node. Python executes side-effect free tasks, cleanly consuming explicitly mapped inputs and returning strongly-typed outputs.",
+        code: `def get_access_token(params: Params) -> dict[str, str]:
+    client_id = params.inputs.get("client_id")
+    client_secret = params.inputs.get("client_secret")
+    refresh_token = params.inputs.get("refresh_token")
+
+    response = requests.post(
+        "https://oauth2.googleapis.com/token",
+        data={
+            "client_id": client_id,
+            "client_secret": client_secret,
+            "refresh_token": refresh_token,
+            "grant_type": "refresh_token",
+        },
+    )
+    response.raise_for_status()
+    access_token = response.json().get("access_token")
+
+    return { "access_token": access_token }
+`
+    },
+    view: {
+        language: "yaml",
+        file: "run.yaml",
+        title: "Reactive UI Layer",
+        desc: "A declarative view driven natively by the state of your background DAG execution. UI elements block, reveal, or dispatch graphs dynamically.",
+        code: `title: "Run Backup"
+description: Back up your Google Drive locally.
+top_level: true
+effects:
+  - graph: hexmod-backup.show_token
+layout:
+  - type: label
+    text: Let's verify your Google Drive login.
+  - type: container
+    visible_when: 
+      path: "hexmod-backup.show_token:token_status"
+      is: "active"
+    children:
+      - type: button
+        text: "Authorize"
+        on_click:
+          graph:
+            id: hexmod-backup.auth
+            inputs: {}
 `
     },
 };
 
 export default function YamlPreview() {
-    const [activeTab, setActiveTab] = useState<keyof typeof codeSnippets>("item");
+    const [activeTab, setActiveTab] = useState<keyof typeof codeSnippets>("graph");
 
     return (
         <section className="py-24 bg-slate-950 px-6" id="Architecture">
             <div className="max-w-6xl mx-auto">
                 <div className="mb-12">
                     <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 tracking-tighter">
-                        Architectural <span className="text-blue-500">Transparency.</span>
+                        Pipeline <span className="text-blue-500">Determinism.</span>
                     </h2>
                     <p className="text-slate-400 text-lg max-w-2xl leading-relaxed">
-                        HexBox apps are broken into three layers. Click through the tabs to see how
-                        a personal assistant is defined, secured, and executed.
+                        HexBox processes applications as deterministic, auditable graphs.
+                        Click through the layers to see how topologies, actions, and reactive UI mesh together.
                     </p>
                 </div>
 
@@ -100,49 +118,35 @@ export default function YamlPreview() {
                             <Code2 className="w-4 h-4 text-blue-500" />
                             {codeSnippets[activeTab].file}
                         </div>
-                        <pre className="font-mono text-sm leading-relaxed text-slate-300">
+                        <pre className="font-mono text-sm leading-relaxed text-slate-300 overflow-x-auto">
                             <code>
                                 {codeSnippets[activeTab].code.split('\n').map((line, i) => (
                                     <div key={i} className="flex gap-4">
-                                        <span className="text-slate-700 w-4 text-right">{i + 1}</span>
-
+                                        <span className="text-slate-700 w-4 text-right select-none">{i + 1}</span>
                                         <span>
-                                            {/* Simple logic: if it's python, use different colors than YAML */}
                                             {codeSnippets[activeTab].language === 'python' ? (
-                                                // Python Logic
+                                                // Python Syntax Emulation
                                                 line.trim().startsWith('#') ? (
                                                     <span className="text-emerald-500/80 italic">{line}</span>
                                                 ) : (
-                                                    // Split on braces to isolate the variables inside the f-string
-                                                    line.split(/(\{|\})/).map((word, i) => {
-                                                        // Highlight the braces and the variables inside them as Blue/Cyan
-                                                        if (word === '{' || word === '}') {
-                                                            return <span key={i} className="text-blue-400 font-bold">{word}</span>;
+                                                    line.split(/(\s+|\.|\(|\)|:|"|')/).map((part, j) => {
+                                                        if (['def', 'import', 'return', 'from'].includes(part)) {
+                                                            return <span key={j} className="text-purple-400">{part}</span>;
                                                         }
-
-                                                        // If we are inside the braces (odd indexes in this specific split), keep it blue
-                                                        if (i % 4 === 2) {
-                                                            return <span key={i} className="text-blue-400">{word}</span>;
+                                                        if (['requests', 'post', 'get', 'raise_for_status', 'json'].includes(part)) {
+                                                            return <span key={j} className="text-yellow-400">{part}</span>;
                                                         }
-
-                                                        // Handle the rest of the line with standard keywords
-                                                        return word.split(/(\s+|\.|\(|\))/).map((part, j) => {
-                                                            if (part === 'import' || part === 'hex' || part === 'print') {
-                                                                const color = part === 'import' ? 'text-purple-400' : 'text-yellow-400';
-                                                                return <span key={j} className={color}>{part}</span>;
-                                                            }
-                                                            // Make the f-string and its contents Emerald Green
-                                                            if (part.includes('"') || part.includes("'") || part === "You" || part === "said") {
-                                                                return <span key={j} className="text-emerald-400">{part}</span>;
-                                                            }
-                                                            return <span key={j} className="text-slate-300">{part}</span>;
-                                                        });
+                                                        if (part.startsWith('"') || part.startsWith("'") || ['Params', 'dict', 'str'].includes(part)) {
+                                                            return <span key={j} className="text-emerald-400">{part}</span>;
+                                                        }
+                                                        return <span key={j} className="text-slate-300">{part}</span>;
                                                     })
                                                 )
                                             ) : (
+                                                // YAML Syntax Emulation
                                                 <span>
                                                     <span className="text-blue-400">{line.split(':')[0]}</span>
-                                                    {line.includes(':') && <span className="text-emerald-400">:{line.split(':')[1]}</span>}
+                                                    {line.includes(':') && <span className="text-emerald-400">:{line.substring(line.indexOf(':') + 1)}</span>}
                                                 </span>
                                             )}
                                         </span>
@@ -157,10 +161,9 @@ export default function YamlPreview() {
                         <div className="space-y-6">
                             <div className="p-4 bg-blue-500/5 border border-blue-500/10 rounded-xl">
                                 <h4 className="text-white font-bold mb-2 flex items-center gap-2">
-                                    {activeTab === 'contract' && <ShieldCheck className="w-4 h-4 text-blue-400" />}
-                                    {activeTab === 'provider' && <Layers className="w-4 h-4 text-blue-400" />}
-                                    {activeTab === 'code' && <Terminal className="w-4 h-4 text-blue-400" />}
-                                    {activeTab === 'item' && <Box className="w-4 h-4 text-blue-400" />}
+                                    {activeTab === 'graph' && <GitFork className="w-4 h-4 text-blue-400" />}
+                                    {activeTab === 'node' && <Cpu className="w-4 h-4 text-blue-400" />}
+                                    {activeTab === 'view' && <Eye className="w-4 h-4 text-blue-400" />}
                                     {codeSnippets[activeTab].title}
                                 </h4>
                                 <p className="text-slate-400 text-sm leading-relaxed">
@@ -171,11 +174,15 @@ export default function YamlPreview() {
                             <div className="space-y-3">
                                 <div className="flex items-center gap-3 text-xs font-mono text-slate-500">
                                     <Check className="w-3 h-3 text-emerald-500" />
-                                    Verified by HexOS Core
+                                    Acyclic Dependency Graph
                                 </div>
                                 <div className="flex items-center gap-3 text-xs font-mono text-slate-500">
                                     <Check className="w-3 h-3 text-emerald-500" />
-                                    Local Execution Only
+                                    Isolated Execution Nodes
+                                </div>
+                                <div className="flex items-center gap-3 text-xs font-mono text-slate-500">
+                                    <Check className="w-3 h-3 text-emerald-500" />
+                                    Reactive UI Dataflow
                                 </div>
                             </div>
                         </div>

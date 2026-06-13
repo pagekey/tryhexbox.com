@@ -1,7 +1,7 @@
 import Features from "@/components/Features"
-import Footer from "@/components/Footer"
 import Hero from "@/components/Hero"
 import HowItWorks from "@/components/HowItWorks"
+import Layout from "@/components/Layout"
 import Order from "@/components/Order"
 import YamlPreview from "@/components/YamlPreview"
 import { useEffect } from "react"
@@ -20,12 +20,11 @@ export default function Home() {
         }
     }, []);
 
-    return <>
+    return <Layout>
         <Hero />
         <Features />
         <YamlPreview />
         <HowItWorks />
         <Order />
-        <Footer />
-    </>
+    </Layout>
 }

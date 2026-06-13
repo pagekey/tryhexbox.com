@@ -25,10 +25,10 @@ export default function Order() {
 
                         <ul className="space-y-4">
                             {[
-                                { icon: Box, text: "Raspberry Pi 3B+ (Industrial Grade)" },
+                                { icon: Box, text: "High-quality Compute Hardware" },
                                 { icon: Zap, text: "Hard-Shell Protective Housing & Power" },
                                 { icon: Globe, text: "Ethernet Cable (Plug and Play)" },
-                                { icon: Cpu, text: "Pre-loaded HexOS" },
+                                { icon: Cpu, text: "Pre-loaded with Hex Orchestrator" },
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-slate-300 transition-all hover:translate-x-1">
                                     <item.icon className="w-5 h-5 text-blue-500" />

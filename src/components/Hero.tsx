@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Play, Video } from "lucide-react"; // Imported Video icon for devlogs
+import { Play } from "lucide-react";
 import FloatingHexBox from "./FloatingHexBox";
 
 export default function Hero() {

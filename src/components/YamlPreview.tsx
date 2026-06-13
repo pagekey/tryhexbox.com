@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Terminal, Check, Code2, GitFork, Cpu, Eye } from "lucide-react";
+import { Check, Code2, GitFork, Cpu, Eye } from "lucide-react";
 
 const codeSnippets = {
     graph: {

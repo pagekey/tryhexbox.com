@@ -1,153 +1,116 @@
-import { ArrowRight, Video, CheckCircle2, Sparkles, HelpCircle } from "lucide-react";
+import { useEffect, useState } from "react";
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Layout from "@/components/Layout";
-import OrderCard from "@/components/OrderCard"; // Adjusted path assuming it is in components folder
+import { Play } from "lucide-react";
+import FloatingHexBox from "../components/FloatingHexBox";
 
-export default function PhotosPage() {
+export default function Home() {
+    const [isVideoOpen, setIsVideoOpen] = useState(false);
+
+    useEffect(() => {
+        window.location.replace("https://pagekey.io/photos");
+    }, []);
+
     return (
         <Layout>
-            {/* Added deep slate background to match the main Hero aesthetic */}
-            <div className="relative min-h-screen bg-slate-950 text-slate-100 overflow-hidden">
+            <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 px-6 py-20">
+                {/* Background Glow */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-blue-500/5 blur-[120px] rounded-full" />
 
-                {/* Background Ambient Glows */}
-                <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-1/4 left-1/3 w-[600px] h-[300px] bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
 
-                <div className="relative z-10 mx-auto max-w-5xl px-6 py-16 space-y-24">
-
-                    {/* Hero Section */}
-                    <section className="text-center max-w-3xl mx-auto space-y-6">
-                        <Badge
-                            variant="outline"
-                            className="bg-blue-500/5 text-blue-400 border-blue-500/30 px-3 py-1 text-sm font-medium tracking-wide"
-                        >
-                            <Sparkles className="mr-1.5 h-3.5 w-3.5 inline text-blue-400" />
-                            Ultra-Limited Run: Only 1 Unit Available
+                    {/* Left: Text Content */}
+                    <div className="text-left space-y-6">
+                        <Badge variant="outline" className="border-blue-500/50 text-blue-400 bg-blue-500/5">
+                            Notice - URL Update
                         </Badge>
 
-                        <h1 className="text-5xl font-extrabold tracking-tighter sm:text-7xl leading-[1.1] text-white">
-                            Your Photos. <br />
+                        <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white leading-[1.1]">
+                            This page <br />
                             <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent">
-                                Zero Cloud Fees.
+                                has moved.
                             </span>
                         </h1>
 
-                        <p className="text-lg md:text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto">
-                            Immich is the ultimate self-hosted Google Photos alternative. Learn how to build your own, or skip the configuration headache and buy our exclusive, pre-built plug-and-play flagship hardware.
-                        </p>
-
-                        <div className="pt-4 flex flex-col sm:flex-row justify-center gap-4">
-                            <Button size="lg" className="bg-blue-600 hover:bg-blue-500 text-white px-8" asChild>
-                                <a href="#buy-now">
-                                    Secure the Only Unit
-                                    <ArrowRight className="ml-2 h-4 w-4" />
-                                </a>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="text-white border-slate-700 bg-slate-900/50 hover:bg-slate-800"
-                                asChild
-                            >
-                                <a href="#tutorial">
-                                    <Video className="mr-2 h-4 w-4 text-emerald-400" />
-                                    Watch Build Guide
-                                </a>
-                            </Button>
-                        </div>
-                    </section>
-
-                    {/* Video Tutorial Section (The "Do It Yourself" Path) */}
-                    <section id="tutorial" className="space-y-6 scroll-mt-20">
-                        <div className="text-center max-w-2xl mx-auto space-y-2">
-                            <h2 className="text-3xl font-bold tracking-tight text-white">The DIY Guide</h2>
-                            <p className="text-slate-400">
-                                We believe in open, understandable tech. Here is the exact blueprint to install Immich on your own server or laptop for free.
+                        <div className="max-w-[500px] space-y-6">
+                            <p className="text-slate-400 text-lg md:text-xl leading-relaxed">
+                                We are redirecting you to <span className="text-white">pagekey.io/photos</span>. Click below if you aren't redirected automatically or want to watch the pitch.
                             </p>
+
+                            {/* Clean, horizontal manifest line */}
+                            <div className="flex flex-wrap gap-x-4 gap-y-2 font-mono text-[10px] md:text-xs tracking-widest text-blue-500/60 uppercase">
+                                <span className="flex items-center gap-2">
+                                    <div className="w-1 h-1 bg-blue-500 rounded-full" /> No Subscriptions
+                                </span>
+                                <span className="flex items-center gap-2">
+                                    <div className="w-1 h-1 bg-blue-500 rounded-full" /> No Tracking
+                                </span>
+                                <span className="flex items-center gap-2">
+                                    <div className="w-1 h-1 bg-blue-500 rounded-full" /> Local First
+                                </span>
+                            </div>
                         </div>
 
-                        {/* Responsive Video Wrapper */}
-                        <div className="w-full max-w-3xl mx-auto overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/20 shadow-2xl">
+                        <div className="flex flex-wrap gap-4 pt-4">
+                            <a href="https://pagekey.io/photos">
+                                <Button size="lg" className="bg-blue-600 hover:bg-blue-500 px-8">
+                                    Go to HexBox
+                                </Button>
+                            </a>
+                            <Button
+                                size="lg"
+                                variant="outline"
+                                onClick={() => setIsVideoOpen(true)}
+                                className="text-white border-slate-700 bg-slate-900/50 hover:bg-slate-800 gap-2"
+                            >
+                                <Play className="w-4 h-4 fill-current text-blue-500" /> Watch Pitch
+                            </Button>
+                        </div>
+                    </div>
+
+                    {/* Right: Interactive Floating HexBox */}
+                    <div
+                        className="relative flex justify-center items-center cursor-pointer group"
+                        onClick={() => setIsVideoOpen(true)}
+                    >
+                        {/* Hint Overlay for Clicking */}
+                        <div className="absolute z-20 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600/90 text-white px-4 py-2 rounded-full flex items-center gap-2 font-bold shadow-xl translate-y-20">
+                            <Play className="w-4 h-4 fill-current" /> Play Video
+                        </div>
+
+                        <FloatingHexBox />
+                    </div>
+                </div>
+
+                {/* Video Modal */}
+                {isVideoOpen && (
+                    <div className="fixed inset-0 z-[100] bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4 lg:p-12">
+                        <div className="relative w-full max-w-5xl aspect-video bg-black border border-slate-800 rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+
+                            {/* Close Button */}
+                            <button
+                                onClick={() => setIsVideoOpen(false)}
+                                className="absolute top-4 right-4 text-white/50 hover:text-white z-[110] bg-black/20 backdrop-blur-md p-2 rounded-full transition-colors"
+                            >
+                                <span className="sr-only">Close</span>
+                                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            {/* Responsive Iframe */}
                             <iframe
-                                className="w-full aspect-video"
-                                src="https://www.youtube.com/embed/0DyBc2b1KzY"
-                                title="Immich DIY Setup Guide"
+                                className="absolute top-0 left-0 w-full h-full"
+                                src="https://www.youtube.com/embed/HaWhwNRAgLo?autoplay=1"
+                                title="HexBox Mission"
+                                frameBorder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowFullScreen
                             ></iframe>
                         </div>
-                    </section>
-
-                    {/* The Pivot / "Do It For Me" Pitch */}
-                    <section id="buy-now" className="scroll-mt-20">
-                        <div className="grid gap-12 md:grid-cols-5 items-center">
-
-                            {/* Value Prop Columns */}
-                            <div className="md:col-span-3 space-y-6">
-                                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-white">
-                                    Don't want the hassle? <br />
-                                    <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                                        Meet HexBox Photos.
-                                    </span>
-                                </h2>
-                                <p className="text-slate-400 leading-relaxed">
-                                    Setting up Docker, configuring reverse proxies, managing persistent storage, and tuning hardware acceleration can take hours of trial and error.
-                                </p>
-                                <p className="text-slate-400 leading-relaxed">
-                                    We've done all the heavy lifting. This is a pristine, premium hardware build, meticulously optimized for rapid photo indexing and facial recognition, shipped straight to your door.
-                                </p>
-
-                                <div className="grid gap-4 sm:grid-cols-2 pt-2">
-                                    {[
-                                        "Pre-installed Immich production build",
-                                        "Plug & Play local network setup",
-                                        "Local-first data privacy",
-                                        "No monthly subscription cloud traps",
-                                        "Hand-assembled single unit batch",
-                                        "Local, private machine learning",
-                                    ].map((feature, i) => (
-                                        <div key={i} className="flex items-start gap-2.5">
-                                            <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
-                                            <span className="text-sm font-medium text-slate-300">{feature}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Pricing / Reusable Order Card Component */}
-                            <div className="md:col-span-2">
-                                <OrderCard
-                                    apiEndpoint="https://zu0rim0p04.execute-api.us-east-1.amazonaws.com/default/email-signup-handler"
-                                    stripeCheckoutUrl="https://buy.stripe.com/fZu8wQ6yu7BYckP8pDgEg08"
-                                />
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Quick Micro-FAQ for Skeptical Buyers */}
-                    <section className="border-t border-slate-900 pt-16 max-w-3xl mx-auto space-y-8">
-                        <h3 className="text-2xl font-bold tracking-tight text-center text-white">Frequently Asked Questions</h3>
-                        <div className="grid gap-8 sm:grid-cols-2">
-                            <div className="space-y-2">
-                                <h4 className="font-semibold text-base flex items-center gap-2 text-slate-200">
-                                    <HelpCircle className="h-4 w-4 text-blue-400 shrink-0" /> What hardware is it?
-                                </h4>
-                                <p className="text-sm text-slate-400 leading-relaxed">
-                                    It runs on a low-power, high-efficiency mini-PC node equipped with high-speed local flash storage for immediate, snappy lookups and accelerated background face tagging.
-                                </p>
-                            </div>
-                            <div className="space-y-2">
-                                <h4 className="font-semibold text-base flex items-center gap-2 text-slate-200">
-                                    <HelpCircle className="h-4 w-4 text-blue-400 shrink-0" /> Can I expand storage?
-                                </h4>
-                                <p className="text-sm text-slate-400 leading-relaxed">
-                                    Absolutely. It features high-speed expansion ports, allowing you to easily map external solid-state drives or network-attached shares (NAS).
-                                </p>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+                    </div>
+                )}
             </div>
         </Layout>
     );

@@ -2,9 +2,12 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="referrer" content="no-referrer">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'">
+        <script src="/callback.js"></script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>HexBox OAuth | Success</title>
+        <title>Connect Google Drive | HexBox</title>
         <style>
             :root {
                 --bg: #0f172a;
@@ -68,6 +71,11 @@
                 margin: 0;
                 display: block;
                 min-height: 1.2rem;
+                width: 100%;
+                box-sizing: border-box;
+                background: transparent;
+                border: none;
+                resize: vertical;
             }
 
             .copy-btn {
@@ -107,55 +115,22 @@
     <body>
 
         <div class="container">
-            <h1>Authorization Complete</h1>
-            <p>Paste this code into your HexBox terminal or dashboard to finish the setup.</p>
+            <h1 id="heading">Google Drive authorization</h1>
+            <p id="message">Checking the authorization response…</p>
 
-            <div class="code-wrapper">
-                <code id="codeDisplay">Loading...</code>
+            <div id="result" hidden>
+                <div class="code-wrapper">
+                    <label for="codeDisplay">Connection code</label>
+                    <textarea id="codeDisplay" readonly rows="8" autocomplete="off" spellcheck="false"></textarea>
+                </div>
+                <button type="button" class="copy-btn" id="copyBtn">Copy connection code</button>
+                <p id="copyStatus" role="status"></p>
             </div>
 
-            <button class="copy-btn" id="copyBtn">Copy to Clipboard</button>
-
             <div class="footer-note">
-        You can safely close this window after copying.
-    </div>
+                Return to HexBox to finish connecting. You can close this window after copying.
+            </div>
+            <noscript>Enable JavaScript, then return to HexBox and start again.</noscript>
         </div>
-
-        <script>
-            // 1. Extract the code from URL
-            const params = new URLSearchParams(window.location.search);
-            const code = params.get("code") || "No code found in URL";
-            const display = document.getElementById("codeDisplay");
-            const btn = document.getElementById("copyBtn");
-
-            display.textContent = code;
-
-            // 2. Copy Functionality
-            btn.addEventListener("click", async () => {
-                try {
-                    await navigator
-                        .clipboard
-                        .writeText(code);
-
-                    // Visual feedback
-                    const originalText = btn.textContent;
-                    btn.textContent = "Copied!";
-                    btn
-                        .classList
-                        .add("success");
-
-                    setTimeout(() => {
-                        btn.textContent = originalText;
-                        btn
-                            .classList
-                            .remove("success");
-                    }, 2000);
-                } catch (err) {
-                    console.error("Failed to copy: ", err);
-                    alert("Please manualy select and copy the code.");
-                }
-            });
-        </script>
-
     </body>
 </html>

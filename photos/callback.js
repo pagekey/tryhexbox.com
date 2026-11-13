@@ -1,47 +1,102 @@
+
 "use strict";
 
 (() => {
-    // Run in the head, before loading other assets or rendering the response.
+    // Remove OAuth parameters from the visible URL immediately.
     const query = window.location.search;
     window.history.replaceState(null, "", window.location.pathname);
 
     document.addEventListener("DOMContentLoaded", () => {
+        const heading = document.getElementById("heading");
         const message = document.getElementById("message");
+        const result = document.getElementById("result");
+        const statusIcon = document.getElementById("statusIcon");
+        const statusSymbol = document.getElementById("statusSymbol");
+        const eyebrow = document.getElementById("eyebrow");
+
         const canceled = () => {
-            message.textContent = "Authorization canceled or invalid; return to HexBox and start again.";
+            heading.textContent = "Connection couldn't be completed";
+            message.textContent =
+                "The authorization response was canceled or invalid. Return to HexBox and try connecting Google Drive again.";
+
+            eyebrow.textContent = "Connection unsuccessful";
+            statusIcon.classList.add("error");
+            statusSymbol.textContent = "!";
+            result.hidden = true;
         };
 
         try {
             if (query.length > 16384) return canceled();
-            // URLSearchParams otherwise silently repairs malformed percent/UTF-8 input.
+
+            // Reject malformed percent encoding and UTF-8.
             decodeURIComponent(query.replaceAll("+", " "));
+
             const params = new URLSearchParams(query);
+
             if (params.has("error")) return canceled();
-            if (params.getAll("code").length !== 1 || params.getAll("state").length !== 1) return canceled();
+
+            if (
+                params.getAll("code").length !== 1 ||
+                params.getAll("state").length !== 1
+            ) {
+                return canceled();
+            }
+
             const code = params.get("code");
             const state = params.get("state");
+
             if (!code.trim() || !state.trim()) return canceled();
 
-            const bytes = new TextEncoder().encode(JSON.stringify({ code, state }));
+            const bytes = new TextEncoder().encode(
+                JSON.stringify({ code, state })
+            );
+
             if (bytes.length > 16384) return canceled();
-            const connectionCode = "hexbox-google-v1." + btoa(String.fromCharCode(...bytes))
-                .replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
+
+            const connectionCode =
+                "hexbox-google-v1." +
+                btoa(String.fromCharCode(...bytes))
+                    .replaceAll("+", "-")
+                    .replaceAll("/", "_")
+                    .replace(/=+$/, "");
+
             if (connectionCode.length > 16384) return canceled();
 
             const display = document.getElementById("codeDisplay");
+            const copyBtn = document.getElementById("copyBtn");
+            const copyLabel = document.getElementById("copyLabel");
+            const copyStatus = document.getElementById("copyStatus");
+
             display.value = connectionCode;
-            document.getElementById("heading").textContent = "Return to HexBox";
-            message.textContent = "Copy the connection code, return to HexBox, and choose Finish connecting. This short-lived code contains no access or refresh tokens.";
-            document.getElementById("result").hidden = false;
-            document.getElementById("copyBtn").addEventListener("click", async () => {
-                const status = document.getElementById("copyStatus");
+
+            heading.textContent = "Return to your HexBox";
+            message.textContent =
+                "Google authorization was successful. Copy the connection code below to finish connecting your account.";
+
+            eyebrow.textContent = "Authorization successful";
+            statusSymbol.textContent = "✓";
+
+            result.hidden = false;
+
+            copyBtn.addEventListener("click", async () => {
+                copyStatus.textContent = "";
+
                 try {
                     await navigator.clipboard.writeText(display.value);
-                    status.textContent = "Copied. Return to HexBox and paste the connection code.";
+
+                    copyBtn.classList.add("success");
+                    copyLabel.textContent = "Copied successfully";
+                    copyStatus.textContent =
+                        "Your code is copied. Return to HexBox to finish connecting.";
                 } catch {
                     display.focus();
                     display.select();
-                    status.textContent = "Copy the selected connection code manually, then return to HexBox.";
+                    display.setSelectionRange(0, display.value.length);
+
+                    copyBtn.classList.remove("success");
+                    copyLabel.textContent = "Copy manually";
+                    copyStatus.textContent =
+                        "Your code is selected. Copy it manually, then return to HexBox.";
                 }
             });
         } catch {
